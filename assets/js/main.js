@@ -52,24 +52,16 @@ formEL.addEventListener("submit", function(e) {
         inputNumberValue.push(element);
         // console.log(inputValue);
     };
-    
-    // creo un'array per salvare i numeri che combaciano
-    let sameNumber = [];
-    // creo un contatore
-    let counter = 0;
+
     // ciclo all'interno dei randomNumber per vedere quali combaciano con gli InputNumberValue
     for (let i = 0; i < randomNumber.length; i++) {
         if (inputNumberValue.includes(randomNumber[i])) {
-            // incremento il contatore
-            counter++
-            // pusho gli elementi che sono inclusi in un terzo array
-            sameNumber.push(randomNumber[i]);
             
-        } else {
-            console.log("Hai perso, 0 numeri indovinati");
+            randomNumber.splice([i], 1);
+
         }
 
-        console.log(sameNumber, counter);
+        console.log(randomNumber);
         
     }
 });
