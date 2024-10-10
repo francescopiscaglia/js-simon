@@ -6,8 +6,6 @@ inputBlockEl.style.display = "none";
 // creare un'array per salvare questi numeri
 let randomNumber = [];
 
-// - Visualizzare in pagina 5 numeri casuali.
-
 // uso il ciclo for per pushare i 5 numeri dentro all'array
 for (let i = 0; i < 5; i++) {
     // richiamo la funzione e salvo i numeri nella costante number
@@ -36,8 +34,16 @@ formEL.addEventListener("submit", function(e) {
     // ciclo all'interno degli input e pusho i loro valori all'interno dell'array
     for (let i = 0; i < inputEL.length; i++) {
         const element = Number(inputEL[i].value);
+        
+        // verifico se sono numeri da 1 a 100
+        if (element < 1 || element > 100 || isNaN(element)) {
+            alert("Inserisci solo numeri da 1 a 100");
+            formEL.reset();
+            return;
+        }
+
+        // se passano la verifica allora pusho
         inputNumberValue.push(element);
-        // console.log(inputValue);
     };
 
     // creo un contatore per i numberi uguali
@@ -81,6 +87,7 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
+// funzione per mostrare gli input
 function userInput() {
     // faccio sparire i numeri
     randomNumberEL.style.display = "none";
@@ -89,7 +96,7 @@ function userInput() {
     inputBlockEl.style.display = "block";
 };
 
-
+// funzione per inserire il markup con il risultato
 function addMarkup(result, counter, equalNumber) {
     return `
     <div>
@@ -97,5 +104,3 @@ function addMarkup(result, counter, equalNumber) {
     </div>
     `;    
 };
-
-// 2,41,54,6,32
