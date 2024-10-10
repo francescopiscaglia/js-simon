@@ -53,16 +53,25 @@ formEL.addEventListener("submit", function(e) {
         // console.log(inputValue);
     };
 
+    let counter = 0;
+    let sameNumber = [];
+
     // ciclo all'interno dei randomNumber per vedere quali combaciano con gli InputNumberValue
-    for (let i = 0; i < randomNumber.length; i++) {
-        if (inputNumberValue.includes(randomNumber[i])) {
-            
-            randomNumber.splice([i], 1);
+    for (let i = 0; i < inputNumberValue.length; i++) {
+        if (randomNumber.includes(inputNumberValue[i])) {
+            // aumento il contatore di 1
+            counter++
+            sameNumber.push(inputNumberValue[i]);
+        };   
+    };
 
-        }
-
-        console.log(randomNumber);
-        
+    // verifico quanti numeri combaciano
+    if (counter === randomNumber.length) {
+        // allora tutti i numberi combaciano
+        console.log("Hai vinto");
+    } else {
+        // mostro quanti numeri combaciano
+        console.log(`Hai trovato ${counter} numeri corretti: ${sameNumber}`);
     }
 });
 
