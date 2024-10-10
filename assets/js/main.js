@@ -28,7 +28,7 @@ let randomNumberEL = document.getElementById("random-number");
 randomNumberEL.innerText = randomNumber;
 
 // far partire un timer di 30 sec
-setInterval(userInput, 3000);
+setInterval(userInput, 1000);
 
 function userInput() {
 
@@ -39,13 +39,27 @@ function userInput() {
     inputBlockEl.style.display = "block";
 };
 
-// far scomparire i numeri
-
-// far apparire 5 input per l'utente
-
-
-
 // verificare se i numeri inseriti dall'utente corrispondo a quelli generati
+const formEL = document.querySelector("form");
 
+formEL.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // recupero i valori degli input
+    const inputEL = document.getElementsByTagName("input");
+    // console.log(inputEL);
+
+    // creo un'array vuoto dove salvare i valori di input
+    let inputValue = [];
+
+    // ciclo all'interno degli input e pusho i loro valori all'interno dell'
+    for (let i = 0; i < inputEL.length; i++) {
+        const element = inputEL[i];
+        inputValue.push(element.value);
+    }
+
+    console.log(inputValue);
+
+})
 
 // mostrare il risultato
