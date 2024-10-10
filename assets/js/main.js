@@ -17,7 +17,9 @@ for (let i = 0; i < 5; i++) {
     randomNumber.push(number);
 }
 
-console.log(randomNumber);
+// stampo in pagina i numeri
+let randomNumberEL = document.getElementById("random-number");
+randomNumberEL.innerText = randomNumber;
 
 // far partire un timer di 30 sec
 
