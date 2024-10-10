@@ -1,8 +1,6 @@
-// preparazione
 // seleziono gli input dall DOM e metto diplay none
 const inputBlockEl = document.querySelector(".user-input");
 inputBlockEl.style.display = "none";
-
 // creare un'array per salvare questi numeri
 let randomNumber = [];
 
@@ -35,13 +33,11 @@ formEL.addEventListener("submit", function(e) {
     for (let i = 0; i < inputEL.length; i++) {
         const element = Number(inputEL[i].value);
         
-        // verifico se sono numeri da 1 a 100
-        if (element < 1 || element > 100 || isNaN(element)) {
-            alert("Inserisci solo numeri da 1 a 100");
-            formEL.reset();
+        // richiamo la funzione per validare i numeri dell'utente
+        const isvalidNumber = isValid(element, formEL);
+        if (!isvalidNumber) {
             return;
         }
-
         // se passano la verifica allora pusho
         inputNumberValue.push(element);
     };
@@ -62,29 +58,29 @@ formEL.addEventListener("submit", function(e) {
             sameNumber.push(inputNumberValue[i]);
         };   
     };
-    
-    // verifico quanti numeri combaciano
-    if (counter === randomNumber.length) {
-        // allora tutti i numberi combaciano
-        result = " Hai vinto!";
-        
-    } else if (counter === 0){
-        result = "Hai perso :(";
 
-    } else {
-        // mostro quanti numeri combaciano
-        result = "C'eri quasi";
-    }
-    
+    // richiamo la funzione per verificare quanti numeri uguali ci sonon
+    const isSameNumber = numberVerification(counter, randomNumber);
     // mostrare il risultato
-    const markup = addMarkup(result ,counter, sameNumber);
-
+    const markup = addMarkup(isSameNumber ,counter, sameNumber);
+    // inserisco il markup
     formEL.insertAdjacentHTML("beforeend", markup);
 });
 
 // creare la funzione che generi i numeri casuali
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+//funzione per validare i dati dell'utente
+function isValid(numbers, form) {
+    // verifico se sono numeri da 1 a 100
+    if (numbers < 1 || numbers > 100 || isNaN(numbers)) {
+        alert("Inserisci solo numeri da 1 a 100");
+        form.reset();
+        return false;
+    }
+    return true;
 }
 
 // funzione per mostrare gli input
@@ -96,11 +92,30 @@ function userInput() {
     inputBlockEl.style.display = "block";
 };
 
+// funzione per verificare i numeri
+function numberVerification(counter, array) {
+    // verifico quanti numeri combaciano
+    if (counter === array.length) {
+        // allora tutti i numberi combaciano
+        result = " Hai vinto!";
+        
+    } else if (counter === 0){
+        result = "Hai perso :(";
+
+    } else {
+        // mostro quanti numeri combaciano
+        result = "C'eri quasi";
+    };
+
+    return result;
+}
+
 // funzione per inserire il markup con il risultato
 function addMarkup(result, counter, equalNumber) {
     return `
     <div>
-        <p>${result} Hai trovato ${counter} numeri corretti: ${equalNumber}</p>
+        <p>${result} Hai trovato ${counter} numeri corretti: ${equalNumber.join(", ")}</p>
     </div>
     `;    
 };
+
