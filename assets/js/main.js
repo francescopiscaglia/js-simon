@@ -1,7 +1,13 @@
-// - Visualizzare in pagina 5 numeri casuali.
+// preparazione
+// seleziono gli input dall DOM e metto diplay none
+const inputBlockEl = document.querySelector(".user-input");
+inputBlockEl.style.display = "none";
 
 // creare un'array per salvare questi numeri
 let randomNumber = [];
+
+
+// - Visualizzare in pagina 5 numeri casuali.
 
 // creare la funzione che generi i numeri casuali
 function getRndInteger(min, max) {
@@ -15,13 +21,23 @@ for (let i = 0; i < 5; i++) {
     const number = getRndInteger(1, 100);
     // pusho i numeri dentro all'array
     randomNumber.push(number);
-}
+};
 
 // stampo in pagina i numeri
 let randomNumberEL = document.getElementById("random-number");
 randomNumberEL.innerText = randomNumber;
 
 // far partire un timer di 30 sec
+setInterval(userInput, 3000);
+
+function userInput() {
+
+    // faccio sparire i numeri
+    randomNumberEL.style.display = "none";
+
+    // faccio apparire gli unput
+    inputBlockEl.style.display = "block";
+};
 
 // far scomparire i numeri
 
