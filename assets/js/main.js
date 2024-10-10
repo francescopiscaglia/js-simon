@@ -8,11 +8,6 @@ let randomNumber = [];
 
 // - Visualizzare in pagina 5 numeri casuali.
 
-// creare la funzione che generi i numeri casuali
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
 // uso il ciclo for per pushare i 5 numeri dentro all'array
 for (let i = 0; i < 5; i++) {
     // richiamo la funzione e salvo i numeri nella costante number
@@ -27,14 +22,6 @@ randomNumberEL.innerText = randomNumber;
 
 // far partire un timer di 30 sec
 setTimeout(userInput, 30000);
-
-function userInput() {
-    // faccio sparire i numeri
-    randomNumberEL.style.display = "none";
-
-    // faccio apparire gli unput
-    inputBlockEl.style.display = "block";
-};
 
 // verificare se i numeri inseriti dall'utente corrispondo a quelli generati
 const formEL = document.querySelector("form");
@@ -73,14 +60,14 @@ formEL.addEventListener("submit", function(e) {
     // verifico quanti numeri combaciano
     if (counter === randomNumber.length) {
         // allora tutti i numberi combaciano
-        result = "vinto";
+        result = " Hai vinto!";
         
     } else if (counter === 0){
-        result = "Hai perso";
+        result = "Hai perso :(";
 
     } else {
         // mostro quanti numeri combaciano
-        result = "c'eri quasi";
+        result = "C'eri quasi";
     }
     
     // mostrare il risultato
@@ -89,14 +76,26 @@ formEL.addEventListener("submit", function(e) {
     formEL.insertAdjacentHTML("beforeend", markup);
 });
 
+// creare la funzione che generi i numeri casuali
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+function userInput() {
+    // faccio sparire i numeri
+    randomNumberEL.style.display = "none";
+
+    // faccio apparire gli unput
+    inputBlockEl.style.display = "block";
+};
+
+
 function addMarkup(result, counter, equalNumber) {
     return `
     <div>
-        <p>Hai ${result}. Hai trovato ${counter} numeri corretti: ${equalNumber}</p>
+        <p>${result} Hai trovato ${counter} numeri corretti: ${equalNumber}</p>
     </div>
     `;    
 };
 
-// 81,78,10,44,1
-// 70,66,57,26,29
-// 4,15,8,71,44
+// 2,41,54,6,32
