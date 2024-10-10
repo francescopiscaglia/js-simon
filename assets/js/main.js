@@ -28,7 +28,7 @@ let randomNumberEL = document.getElementById("random-number");
 randomNumberEL.innerText = randomNumber;
 
 // far partire un timer di 30 sec
-setInterval(userInput, 10000);
+setInterval(userInput, 5000);
 
 function userInput() {
 
@@ -48,41 +48,32 @@ formEL.addEventListener("submit", function(e) {
     // recupero i valori degli input
     const inputEL = document.getElementsByTagName("input");
     // console.log(inputEL);
-
     // creo un'array vuoto dove salvare i valori di input
     let inputValue = [];
-
-    // creo un contatore impostato a 0
-    let counter = 0;
-    // creo un nuovo array dove salvare i numeri che combaciano
+    // creo un'array per salvare i numeri che combaciano
     let sameNumber = [];
+    // creo un contatore
+    let counter = 0;
 
     // ciclo all'interno degli input e pusho i loro valori all'interno dell'array
     for (let i = 0; i < inputEL.length; i++) {
-        const element = inputEL[i];
-        inputValue.push(element.value);
+        const element = Number(inputEL[i].value);
+        inputValue.push(element);
+        // console.log(inputValue);
+    };
 
-        // verifico quanti e quali numeri sono stati individuati
-        if (randomNumber.includes(inputValue[])) {
+    for (let i = 0; i < randomNumber.length; i++) {
+        if (inputValue.includes(randomNumber[i])) {
 
-            // incremento il contatore di 1
+            // incremento il contatore
             counter++
-            // mostro i numeri che combaciano
-            sameNumber.push(inputValue.includes(randomNumber));
-            console.log(sameNumber, counter);
+            // pusho in un terzo array
+            sameNumber.push(randomNumber[i]);
+        } 
 
-        } else {
-            console.log("Hai sbagliato");
-        }
-    
+        console.log(sameNumber, counter);
+        
     }
-
-    // console.log(inputValue);
-
-
-    // itero dentro 38 38 20 7 62 5 24 88 14 39
-
-
-})
+});
 
 // mostrare il risultato
