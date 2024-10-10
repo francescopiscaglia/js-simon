@@ -26,7 +26,7 @@ let randomNumberEL = document.getElementById("random-number");
 randomNumberEL.innerText = randomNumber;
 
 // far partire un timer di 30 sec
-setInterval(userInput, 5000);
+setTimeout(userInput, 30000);
 
 function userInput() {
     // faccio sparire i numeri
@@ -53,26 +53,50 @@ formEL.addEventListener("submit", function(e) {
         // console.log(inputValue);
     };
 
+    // creo un contatore per i numberi uguali
     let counter = 0;
+    // creo un array dove pushare i numeri uguali
     let sameNumber = [];
-
-    // ciclo all'interno dei randomNumber per vedere quali combaciano con gli InputNumberValue
+    // creo una variabile result
+    let result;
+    
+    // ciclo all'interno dei inputNumber per vedere quali combaciano con gli randomNumber
     for (let i = 0; i < inputNumberValue.length; i++) {
         if (randomNumber.includes(inputNumberValue[i])) {
             // aumento il contatore di 1
             counter++
+            // pusho dentro all'array
             sameNumber.push(inputNumberValue[i]);
         };   
     };
-
+    
     // verifico quanti numeri combaciano
     if (counter === randomNumber.length) {
         // allora tutti i numberi combaciano
-        console.log("Hai vinto");
+        result = "vinto";
+        
+    } else if (counter === 0){
+        result = "Hai perso";
+
     } else {
         // mostro quanti numeri combaciano
-        console.log(`Hai trovato ${counter} numeri corretti: ${sameNumber}`);
+        result = "c'eri quasi";
     }
+    
+    // mostrare il risultato
+    const markup = addMarkup(result ,counter, sameNumber);
+
+    formEL.insertAdjacentHTML("beforeend", markup);
 });
 
-// mostrare il risultato
+function addMarkup(result, counter, equalNumber) {
+    return `
+    <div>
+        <p>Hai ${result}. Hai trovato ${counter} numeri corretti: ${equalNumber}</p>
+    </div>
+    `;    
+};
+
+// 81,78,10,44,1
+// 70,66,57,26,29
+// 4,15,8,71,44
